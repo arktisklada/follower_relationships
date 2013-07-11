@@ -1,0 +1,58 @@
+<h2>All Users:</h2>
+<ul>
+  <% @users.each do |u| %>
+
+    <li>
+      <%= u.email %>
+      <% if user_signed_in? and u != current_user and !u.following_relationships.pluck(:follower_id).include?(current_user.id) %>
+        <%= link_to("follow", follow_path(u)) %>
+      <% end %>
+      <% if u.followers.present? %>
+        <ul>
+          <li>FOLLOWERS</li>
+          <% u.followers.each do |f| %>
+            <li><%= f.email %></li>
+          <% end %>
+        </ul>
+      <% end %>
+      <% if u.followings.present? %>
+        <ul>
+          <li>FOLLOWINGS</li>
+          <% u.followings.each do |f| %>
+            <li><%= f.email %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </li>
+
+  <% end %>
+</ul>
+
+
+
+<br>
+<h2>All Relationships:</h2>
+<table border="1" cellspacing="0">
+  <tr>
+    <th>User</th>
+    <th>Following</th>
+    <th>Followers</th>
+  </tr>
+  <% @users.each do |u| %>
+    <tr>
+      <td>
+        <%= u.email %>
+      </td>
+      <td>
+        <% u.followings.each do |f| %>
+          <%= f.email%><br>
+        <%end%>
+      </td>
+      <td>
+        <% u.followers.each do |f| %>
+          <%= f.email %><br>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
