@@ -1,28 +1,21 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is an application for demonstrating a circular relationship of users following other users, and conversely, users being followed by other users.
 
-Things you may want to cover:
+Built in Rails 4, but can easily be ported to rails 3.2 by just creating a new blank project and copying the models, controller action, and views (don't forget to migrate!)
+sqlite 3 for demo purposes.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Uses devise for user model creation and session switching
+ /users/sign_up
+ /users/sign_in
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+The concept demonstrated here is a user model that can follow other users using a relationship model.  The model uses the concept of follower followings.  Think of the user model as being egotistical and everything centers around one as it interacts with others (helps to figure out the difference in terminology between follower and following)
+
+The relationship model exposes follower_id and following_id
+The user model creates an array of followings (other users that the current user is following) and an array of followers (other users that is following the current user)
+
+
+
+If you log in to one of the created users, navigate to root / to see and interact with other users.  
+The other action of note is /follow where it processes the action of following using GET parameters
